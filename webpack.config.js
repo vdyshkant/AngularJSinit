@@ -27,7 +27,18 @@ module.exports = {
   // Здесь перечисляются плагины, которые кастомизируют процесс сборки webpack.
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Webpack app'
+      template: PATHS.source + '/index.pug'
     })
-  ]
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.pug$/,
+        loader: 'pug-loader',
+        options: {
+          pretty: true
+        }
+      }
+    ]
+  }
 }
