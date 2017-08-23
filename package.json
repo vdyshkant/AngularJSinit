@@ -1,0 +1,17 @@
+{
+  "name": "buddhaSoft",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "webpack --watch",
+    "serv": "static build"
+  },
+  "devDependencies": {
+    "node-static": "^0.7.9",
+    "webpack": "^3.5.5"
+  },
+  "dependencies": {
+    "html-webpack-plugin": "^2.30.1"
+  }
+}
