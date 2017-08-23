@@ -14,10 +14,13 @@ const PATHS = {
 };
 
 //-
-module.exports = {
+const common = {
   // точка входа нашего приложения:
   // точкой входа могут быть только те модули, которые не исползуются другими модулям и нашего приложения
-  entry: PATHS.source + '/index.js', // этот модуль использует модуль menu, но сам не используется никаким другим модулем.
+  // entry: PATHS.source + '/index.js', // этот модуль использует модуль menu, но сам не используется никаким другим модулем.
+  entry: {
+    'index': PATHS.source + '/pages/index/index.js'
+  },
 
   // описывает имена файлов и директорию - результат работы webpack
   output: {
@@ -27,7 +30,9 @@ module.exports = {
   // Здесь перечисляются плагины, которые кастомизируют процесс сборки webpack.
   plugins: [
     new HtmlWebpackPlugin({
-      template: PATHS.source + '/index.pug'
+      filename: 'index.html',
+      chunks: ['index'],
+      template: PATHS.source + '/pages/index/index.pug'
     })
   ],
   module: {
@@ -40,5 +45,26 @@ module.exports = {
         }
       }
     ]
+  },
+
+}
+
+const  developmentConfig = {
+  devServer: {
+    stats: 'errors-only',
+    port: 9000
   }
 }
+
+module.exports = function(env){
+  if (env === 'production'){
+    return common;
+  }
+  if (env === 'development'){
+    return Object.assign(
+      {},
+      common,
+      developmentConfig
+    )
+  }
+};
