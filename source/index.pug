@@ -1,0 +1,27 @@
+extends ./base
+
+block title
+  Index page
+
+block main
+  p#url.text-warning
+    br
+    |       AngularJS products store.
+  script.
+    (function(){
+    var displayUrl = function() {
+    document.getElementById('url').innerHTML = "URL: " + document.location.href;
+    };
+    // Update URL display
+    window.setInterval(displayUrl, 250);
+    })();
+  .container(ng-controller='mainCtrl')
+    .panel.panel-default
+      h3.panel-heading Products store
+      .panel-body
+        div(ng-view='')
+        // <ng-include src="'views/table.html'" ng-show="currentView == 'table'"></ng-include>
+        // <ng-include src="'views/edit.html'" ng-show="currentView == 'edit'"></ng-include>
+        // <ng-include src="'views/product.html'" ng-show="currentView == 'product'"></ng-include>
+  script(data-require='jquery@*', data-semver='3.1.1', src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js')
+  script(data-require='bootstrap@3.3.7', data-semver='3.3.7', src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')

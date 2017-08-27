@@ -9,6 +9,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const merge = require('webpack-merge');
 const pug = require('./webpack/pug');
 const devserver = require('./webpack/devserver');
+const sass = require('./webpack/sass');
+const babel = require('./webpack/babel');
 
 //- объект с 2мя свойствами: где исходные файлы будут лежать и где результат работы webpack;
 const PATHS = {
@@ -20,23 +22,23 @@ const PATHS = {
 const common = merge([
   {
     // точка входа нашего приложения:
-    // точкой входа могут быть только те модули, которые не исползуются другими модулям и нашего приложения
+    // точкой входа могут быть только те модули, которые не исползуются другими модулями нашего приложения
     // entry: PATHS.source + '/index.js', // этот модуль использует модуль menu, но сам не используется никаким другим модулем.
     entry: {
-      'index': PATHS.source + '/pages/index/index.js'
+      'index': PATHS.source + '/index.js'
     },
 
     // описывает имена файлов и директорию - результат работы webpack
     output: {
       path: PATHS.build,
-      filename: '[name].js' // [name] - в него автоматически будут подставляться имена точек входа нашего приложения.
+      filename: 'js/[name].js' // [name] - в него автоматически будут подставляться имена точек входа нашего приложения.
     },
     // Здесь перечисляются плагины, которые кастомизируют процесс сборки webpack.
     plugins: [
       new HtmlWebpackPlugin({
         filename: 'index.html',
         chunks: ['index'],
-        template: PATHS.source + '/pages/index/index.pug'
+        template: PATHS.source + '/index.pug'
       })
     ],
   },
@@ -52,7 +54,8 @@ module.exports = function(env){
   if (env === 'development'){
     return merge([
       common,
-      devserver()
+      devserver(),
+      sass()
     ])
   }
 };

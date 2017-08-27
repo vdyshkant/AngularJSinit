@@ -1,0 +1,16 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    link(data-require='bootstrap@3.3.7', data-semver='3.3.7', rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+    script.
+      document.write('<base href="' + document.location + '" />');
+    script(data-require='angular.js@1.5.8', data-semver='1.5.8', src='https://code.angularjs.org/1.5.8/angular.js')
+    script(data-require='angular-route@1.5.8', data-semver='1.5.8', src='https://code.angularjs.org/1.5.8/angular-route.js')
+    script(data-require='ngStorage@*', data-semver='0.3.11', src='https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.js')
+    //- link(rel='stylesheet', href='index.css')
+    title
+      block title
+
+  body(ng-app='storeApp', ng-controller='homeCtrl')
+    block main
